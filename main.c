@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+// https://stackoverflow.com/questions/8465006/how-do-i-concatenate-two-strings-in-c
 char* concat(const char *s1, const char *s2)
 {
     char *result = malloc(strlen(s1) + strlen(s2) + 1); // +1 for the null-terminator
