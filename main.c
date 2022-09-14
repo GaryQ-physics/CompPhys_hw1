@@ -29,13 +29,14 @@ int fillrand(float * arr, int N){
 }
 
 int fillLCR(float * arr, int N, int seed){
-    int a=63, c=319, m=65537;
-    int x[N];
+    //note largest can get before modulo is a*m+c
+    //int64_t a=63, c=319, m=65537; // still within what 32bit integer supports, but whatever
+    int64_t a=6996663, c=420, m=65537;
+    int64_t x[N];
 
-    x[0]=seed;
+    x[0]= (int64_t)seed;
     arr[0]=(float)x[0]/(m-1);
     for(int i=1;i<N;i++){
-        //note largest can get before modulo is a*m+c, still less than 32bit integer supports
         x[i]  = (a*x[i-1]+c) % m;
         arr[i]=(float)x[i]/(m-1);
     }
@@ -106,12 +107,12 @@ int stats(float* arr,int N,float* covar, int nrange, char* name){
 
 
 int main(){
-    int N = 1000000;  // num of random numbers in each sample/array
-    int nrange = 10; // nrange-1 is highest n we will calculate "A(n)" for (covariance)
+    int N = 100000;  // num of random numbers in each sample/array
+    int nrange = 20; // nrange-1 is highest n we will calculate "A(n)" for (covariance)
 
-    int seed1 = 11111;
-    int seed2 = 33333;
-    int seed3 = 55555;
+    int seed1 = 11;
+    int seed2 = 321;
+    int seed3 = 5678;
 
     float arr[N];
     float covar[nrange];
